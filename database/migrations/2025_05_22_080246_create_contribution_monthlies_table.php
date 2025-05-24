@@ -14,13 +14,16 @@ return new class extends Migration
         Schema::create('contribution_monthlies', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->unsignedBigInteger('house_id');
-            $table->date('date');
-            $table->string('payment_type');
-            $table->enum('payment_status',['complete','half','not yet']);
+            $table->foreignId('house_id')->constrained();
+            $table->string('bulan');
+            $table->string('tahun');
+            $table->foreignId('item_id')->constrained('master_data_monthly_payments')->onDelete('cascade');
+
+            $table->enum('tipe_pembayaran', ['bulanan', 'tahunan']);
+            $table->enum('status_pembayaran', ['Sudah', 'Belum'])->default('Belum');
             $table->integer('contribution_total');
 
-            $table->foreign('house_id')->references('id')->on('houses');
+
         });
     }
 

@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ContributionAccidentialController;
+use App\Http\Controllers\ContributionMonthlyController;
 use App\Http\Controllers\HouseController;
 use App\Http\Controllers\HouseResidentController;
 use App\Http\Controllers\MasterDataMonthlyPaymentController;
@@ -53,11 +54,24 @@ Route::middleware(['auth:api'])->group(function(){
     });
 
     Route::group(['prefix' => 'contribution_monthly', 'as' => 'contribution_monthly.','namespace'=> 'contribution_monthly.'], function () {
-        Route::get('/', [Contribution_monthly::class, 'index']);
-        Route::post('/', [Contribution_monthly::class, 'store']);
-        Route::get('/{id}', [Contribution_monthly::class, 'show']);
-        Route::put('/{id}', [Contribution_monthly::class, 'update']);
-        Route::delete('/{id}', [Contribution_monthly::class, 'destroy']);
+        Route::get('/Item', [ContributionMonthlyController::class, 'Item']);
+        Route::get('/summary', [ContributionMonthlyController::class, 'summary']);
+        Route::get('/', [ContributionMonthlyController::class, 'index']);
+        Route::post('/', [ContributionMonthlyController::class, 'store']);
+        Route::post('/payment', [ContributionMonthlyController::class, 'storePayment']);
+        Route::get('/{id}', [ContributionMonthlyController::class, 'show']);
+        Route::put('/{id}', [ContributionMonthlyController::class, 'update']);
+        Route::delete('/{id}', [ContributionMonthlyController::class, 'destroy']);
+    });
+    Route::group(['prefix' => 'contribution_accidential', 'as' => 'contribution_accidential.','namespace'=> 'contribution_accidential.'], function () {
+        Route::get('/Item', [ContributionAccidentialController::class, 'Item']);
+        Route::get('/summary', [ContributionAccidentialController::class, 'summary']);
+        Route::get('/', [ContributionAccidentialController::class, 'index']);
+        Route::post('/', [ContributionAccidentialController::class, 'store']);
+        Route::post('/payment', [ContributionAccidentialController::class, 'storePayment']);
+        Route::get('/{id}', [ContributionAccidentialController::class, 'show']);
+        Route::put('/{id}', [ContributionAccidentialController::class, 'update']);
+        Route::delete('/{id}', [ContributionAccidentialController::class, 'destroy']);
     });
 
     Route::group(['prefix' => 'accidential_data_monthly_payment', 'as' => 'accidential_data_monthly_payment.','namespace'=> 'accidential_data_monthly_payment.'], function () {
@@ -68,11 +82,5 @@ Route::middleware(['auth:api'])->group(function(){
         Route::delete('/{id}', [AccidentialDataMonthlyPaymentController::class, 'destroy']);
     });
 
-    Route::group(['prefix' => 'contribution_accidential', 'as' => 'contribution_accidential.','namespace'=> 'contribution_accidential.'], function () {
-        Route::get('/', [ContributionAccidentialController::class, 'index']);
-        Route::post('/', [ContributionAccidentialController::class, 'store']);
-        Route::get('/{id}', [ContributionAccidentialController::class, 'show']);
-        Route::put('/{id}', [ContributionAccidentialController::class, 'update']);
-        Route::delete('/{id}', [ContributionAccidentialController::class, 'destroy']);
-    });
+
 });

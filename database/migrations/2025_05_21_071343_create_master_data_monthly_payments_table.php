@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('master_data_monthly_payments', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+
             $table->string('name');
             $table->integer('price');
         });

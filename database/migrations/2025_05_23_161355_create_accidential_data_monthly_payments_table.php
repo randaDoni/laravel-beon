@@ -16,6 +16,8 @@ return new class extends Migration
             $table->timestamps();
             $table->string('name');
             $table->integer('price');
+            $table->string('bulan');
+            $table->string('tahun');
         });
     }
 

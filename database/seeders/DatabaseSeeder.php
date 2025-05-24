@@ -125,7 +125,9 @@ class DatabaseSeeder extends Seeder
         DB::table('accidential_data_monthly_payments')->insert([
             [
                 'name' => 'air',
-                'price' => 15000
+                'price' => 15000,
+                'bulan' =>'January',
+                'tahun' =>'2020',
             ]
         ]);
     }

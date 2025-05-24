@@ -13,10 +13,13 @@ return new class extends Migration
     {
         Schema::create('data_contribution_monthly', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('house_id')->constrained();
+            $table->string('bulan');
+            $table->integer('tahun');
+            $table->foreignId('item_id')->constrained('master_data_monthly_payments');
+            $table->enum('tipe_pembayaran', ['bulanan', 'tahunan']);
+            $table->enum('status_pembayaran', ['Sudah', 'Belum'])->default('Belum');
             $table->timestamps();
-            $table->string('name');
-            $table->date('date');
-            $table->string('price');
         });
     }
 
