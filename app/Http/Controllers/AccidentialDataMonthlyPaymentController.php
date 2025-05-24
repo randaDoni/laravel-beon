@@ -30,6 +30,8 @@ class AccidentialDataMonthlyPaymentController extends Controller
     public function store(Request $request)
     {
          $validated = $request->validate([
+            'bulan' => 'required',
+            'tahun' => 'required',
             'name' => 'required|string|max:255',
             'price' => 'required|numeric|min:0',
         ]);
@@ -65,6 +67,8 @@ class AccidentialDataMonthlyPaymentController extends Controller
         }
 
         $validated = $request->validate([
+                       'bulan' => 'sometimes|required|string|max:255',
+            'tahun' => 'sometimes|required|numeric|min:0',
             'name' => 'sometimes|required|string|max:255',
             'price' => 'sometimes|required|numeric|min:0',
         ]);
